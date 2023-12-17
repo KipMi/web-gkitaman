@@ -1,0 +1,32 @@
+import React from 'react';
+import Link from 'next/link';
+
+const Tabs = () => {
+  return (
+    <div className="tabs flex justify-center">
+      <Link
+        className="tab tab-bordered hover:tab-active"
+        href="/pelayanan/umum"
+      >
+        Pelayanan Ibadah
+      </Link>
+      <Link
+        className="tab tab-bordered hover:tab-active"
+        href={'/pelayanan/persekutuan-doa'}
+      >
+        Persekutuan Doa
+      </Link>
+      <Link className="tab tab-bordered hover:tab-active" href="">
+        Pemahaman Alkitab
+      </Link>
+      <Link className="tab tab-bordered hover:tab-active" href="">
+        Layanan Baptis
+      </Link>
+      <Link className="tab tab-bordered hover:tab-active" href="">
+        Layanan Pernikahan
+      </Link>
+    </div>
+  );
+};
+
+export default Tabs;

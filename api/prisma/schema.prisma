@@ -1,0 +1,164 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum userRole {
+  SUPERADMIN
+  ADMIN
+  KOMISIANAK
+  KOMISIREMAJA
+  KOMISIPEMUDA
+  KOMISIDEWASA
+  KOMISILANSIA
+  KOMISIKESENIAN
+  KOMISIMULTIMEDIA
+}
+
+model User {
+  id        String   @id @default(uuid())
+  username  String
+  password  String
+  role      userRole @default(SUPERADMIN)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Renungan {
+  id        Int      @id @default(autoincrement())
+  title     String
+  kitab     String
+  ayat      String
+  content   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Jemaat {
+  id            Int       @id @default(autoincrement())
+  noAnggota     Int       @unique
+  namaDepan     String
+  namaTengah    String?
+  namaKeluarga  String
+  noWA          Int
+  noTelpRumah   Int
+  tempatLahir   String
+  ayah          OrangTua? @relation("Ayah", fields: [ayahId], references: [id])
+  ayahId        Int?
+  ibu           OrangTua? @relation("Ibu", fields: [ibuId], references: [id])
+  ibuId         Int?
+  tanggalLahir  DateTime
+  golonganDarah String
+  alamatRumah   String
+  wilayah       String
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+  jemaat        OrangTua? @relation("Jemaat")
+}
+
+model Ibadah {
+  id           Int      @id @default(autoincrement())
+  category     String   @unique
+  temaIbadah   String
+  pemimpin     String
+  linkVideo    String
+  infoTambahan String
+  waktuMulai   DateTime
+  waktuSelesai DateTime
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Doa {
+  id           Int      @id @default(autoincrement())
+  category     String   @unique
+  tema         String
+  pemimpin     String
+  infoTambahan String
+  waktuMulai   DateTime
+  waktuSelesai DateTime
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model LayananBaptis {
+  id              Int      @id @default(autoincrement())
+  category        String   @unique
+  infoPendaftaran String
+  jadwal          DateTime
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+enum CategoryPernikahan {
+  Katekisasi
+  Konseling
+  Pemberkatan
+}
+
+model LayananPernikahan {
+  id              Int                @id @default(autoincrement())
+  category        CategoryPernikahan @unique
+  infoPendaftaran String
+  jadwal          DateTime
+  createdAt       DateTime           @default(now())
+  updatedAt       DateTime           @updatedAt
+}
+
+model KonselingPendeta {
+  id        Int      @id @default(autoincrement())
+  info      String
+  jadwal    DateTime
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model OrangTua {
+  id           Int      @id @default(autoincrement())
+  jemaat       Jemaat?  @relation("Jemaat", fields: [noAnggota], references: [noAnggota])
+  noAnggota    Int?     @unique
+  namaDepan    String
+  namaTengah   String?
+  namaKeluarga String
+  ayah         Jemaat[] @relation("Ayah")
+  ibu          Jemaat[] @relation("Ibu")
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+model Kegiatan {
+  id                Int      @id @default(autoincrement())
+  komisi            String
+  judulKegiatan     String
+  deskripsiKegiatan String
+  imageURL          String
+  createdAt         DateTime @default(now())
+  updatedAt         DateTime @updatedAt
+}
+
+enum posisiKaryawan {
+  PENDETA
+  STAFFKANTOR
+  KOMISI
+}
+
+enum status {
+  AKTIF
+  TIDAKAKTIF
+}
+
+model Karyawan {
+  id           Int            @id @default(autoincrement())
+  namaDepan    String
+  namaTengah   String?
+  status       status         @default(AKTIF)
+  namaKeluarga String
+  imageURL     String
+  posisi       posisiKaryawan @default(STAFFKANTOR)
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+}
