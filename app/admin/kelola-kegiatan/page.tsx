@@ -1,10 +1,8 @@
-'use client';
-
 import React from 'react';
 import FormKegiatan from './FormKegiatan';
 import TabelKegiatan from './TabelKegiatan';
 
-const PengelolaanKegiatanPage = async () => {
+const PengelolaanKegiatanPage = () => {
   return (
     <div className="m-10 min-h-screen p-5">
       <h1 className="text-2xl">Pengelolaan Kegiatan</h1>

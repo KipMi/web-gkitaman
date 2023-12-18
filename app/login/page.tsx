@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import axios from 'axios';
-import { useRouter } from 'next/navigation';
-import React from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import React from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
 const apiURL = process.env.NEXT_PUBLIC_API_URL;
 
 type FormValues = {
@@ -26,12 +26,12 @@ const LoginPage = () => {
     try {
       const response = await axios.post(`${apiURL}/auth/login`, user);
 
-      alert('Login Success');
+      alert("Login Success");
 
-      router.push('/admin/tabel-jemaat');
-      console.log('Login submitted', response.data);
+      router.push("/admin");
+      console.log("Login submitted", response.data);
     } catch (error) {
-      console.error('Error logging in', error);
+      console.error("Error logging in", error);
     }
   };
   return (
@@ -46,8 +46,8 @@ const LoginPage = () => {
           <span className="label-text">Username</span>
         </label>
         <input
-          {...register('username', {
-            required: 'Username is a required value',
+          {...register("username", {
+            required: "Username is a required value",
           })}
           type="text"
           id="username"
@@ -58,8 +58,8 @@ const LoginPage = () => {
           <span className="label-text">Password</span>
         </label>
         <input
-          {...register('password', {
-            required: 'Password is a required value',
+          {...register("password", {
+            required: "Password is a required value",
           })}
           type="password"
           id="password"

@@ -5,15 +5,15 @@ const upload = require("../middlewares/multer.config");
 const router = express.Router();
 
 router.get("/", async (req, res) => {
-  const karyawans = await prisma.karyawan.findMany();
+  const pendeta = await prisma.pendeta.findMany();
 
-  res.send(karyawans);
+  res.send(pendeta);
 });
 
-router.get(":/id", async (req, res) => {
+router.get("/:id", async (req, res) => {
   try {
     const karyawanId = req.params.id;
-    const karyawan = await prisma.karyawan.findUnique({
+    const karyawan = await prisma.pendeta.findUnique({
       where: {
         id: karyawanId,
       },
@@ -32,12 +32,12 @@ router.post("/", upload.single("imageURL"), async (req, res) => {
   // console.log(imageFile);
   // res.send(imageFile);
 
-  // console.log(imageFile.filename);
-  // newKaryawanData.imageURL = imageFile.filename;
-  // newKaryawanData.status;
+  console.log(imageFile.filename);
+  newKaryawanData.imageURL = imageFile.filename;
+  newKaryawanData.status;
 
   try {
-    const karyawan = await prisma.karyawan.create({
+    const karyawan = await prisma.pendeta.create({
       data: {
         namaDepan: newKaryawanData.namaDepan,
         namaTengah: newKaryawanData.namaTengah,
@@ -54,34 +54,6 @@ router.post("/", upload.single("imageURL"), async (req, res) => {
     });
   } catch (error) {
     res.status(500).send(error);
-  }
-});
-
-router.patch("/:id", async (req, res) => {
-  try {
-    const karyawanId = req.params.id;
-    const karyawanData = req.body;
-
-    const karyawan = await prisma.karyawan.update({
-      where: {
-        id: parseInt(karyawanId),
-      },
-      data: {
-        namaDepan: karyawanData.namaDepan,
-        namaTengah: karyawanData.namaTengah,
-        namaKeluarga: karyawanData.namaKeluarga,
-        status: karyawanData.status,
-        imageURL: karyawanData.imageURL,
-        posisi: karyawanData.posisi,
-      },
-    });
-
-    res.send({
-      data: karyawan,
-      message: "Success",
-    });
-  } catch (error) {
-    res.status(400).send(error);
   }
 });
 

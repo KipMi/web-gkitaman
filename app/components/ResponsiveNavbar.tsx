@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import React, { useEffect, useState } from 'react';
-import { useRouter, redirect } from 'next/navigation';
-import Image from 'next/image';
-import gkilogo from '../assets/img/gkilogo.png';
-import Link from 'next/link';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import { useRouter, redirect } from "next/navigation";
+import Image from "next/image";
+import gkilogo from "../assets/img/gkilogo.png";
+import Link from "next/link";
+import axios from "axios";
 const apiURL = process.env.NEXT_PUBLIC_API_URL;
 const url = `${apiURL}/auth`;
 
@@ -16,31 +16,34 @@ type ResponsiveNavbarProps = {
 const ResponsiveNavbar: React.FC<ResponsiveNavbarProps> = ({ children }) => {
   const router = useRouter();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [role, setRole] = useState();
 
   const logout = async () => {
-    await axios.post(url + '/logout');
+    await axios.post(url + "/logout");
     router.refresh();
-    router.push('/');
+    router.push("/");
   };
 
   useEffect(() => {
     const checkLoggedIn = async () => {
       try {
-        const response = await axios.get(url + '/get/user');
+        const response = await axios.get(url + "/get/user");
         const userData = response.data;
 
-        console.log('User is logged in', userData);
+        console.log("User is logged in", userData);
+        setRole(userData.role);
+        console.log(role);
         setIsLoggedIn(true);
       } catch (error) {
         setIsLoggedIn(false);
-        console.log('User is not logged in');
+        console.log("User is not logged in");
       }
 
       console.log(isLoggedIn);
     };
 
     checkLoggedIn();
-  });
+  }, [isLoggedIn, role]);
 
   return (
     <div className="drawer">
@@ -90,19 +93,15 @@ const ResponsiveNavbar: React.FC<ResponsiveNavbarProps> = ({ children }) => {
                   <summary>Tentang Kami</summary>
                   <ul>
                     <li>
-                      <Link href="/pendeta">Pendeta Kami</Link>
+                      <Link href={"/sejarah"}>Sejarah</Link>
                     </li>
 
                     <li>
-                      <Link href={''}>Sejarah</Link>
+                      <Link href={""}>Kontak Kami</Link>
                     </li>
 
                     <li>
-                      <Link href={''}>Kontak Kami</Link>
-                    </li>
-
-                    <li>
-                      <Link href={''}>Yayasan</Link>
+                      <Link href={""}>Yayasan</Link>
                     </li>
                   </ul>
                 </details>
@@ -112,26 +111,34 @@ const ResponsiveNavbar: React.FC<ResponsiveNavbarProps> = ({ children }) => {
                   <details className="dropdown">
                     <summary>Admin Panel</summary>
                     <ul>
-                      <li className="font-normal">
-                        <Link href="/admin/tabel-jemaat">Pendataan Jemaat</Link>
-                      </li>
+                      {(role === "ADMIN" || role === "SUPERADMIN") && (
+                        <li className="font-normal">
+                          <Link href="/admin/tabel-jemaat">
+                            Pendataan Jemaat
+                          </Link>
+                        </li>
+                      )}
+
                       <li className="font-normal">
                         <Link href="/admin/kelola-kegiatan">
                           Pengelolaan Kegiatan
                         </Link>
                       </li>
-                      <li className="font-normal">
-                        <Link href="/admin/kelola-pelayanan/umum">
-                          Pengelolaan Pelayanan
-                        </Link>
-                      </li>
+                      {(role === "ADMIN" || role === "SUPERADMIN") && (
+                        <li className="font-normal">
+                          <Link href="/admin/kelola-pelayanan/umum">
+                            Pengelolaan Pelayanan
+                          </Link>
+                        </li>
+                      )}
+
                       <li>
                         <button onClick={logout}>Logout</button>
                       </li>
                     </ul>
                   </details>
                 ) : (
-                  ''
+                  ""
                 )}
               </li>
             </ul>
@@ -166,10 +173,10 @@ const ResponsiveNavbar: React.FC<ResponsiveNavbarProps> = ({ children }) => {
                   <Link href="/pendeta">Pendeta Kami</Link>
                 </li>
                 <li>
-                  <Link href={''}>Sejarah</Link>
+                  <Link href={""}>Sejarah</Link>
                 </li>
                 <li>
-                  <Link href={''}>Kontak Kami</Link>
+                  <Link href={""}>Kontak Kami</Link>
                 </li>
               </ul>
             </details>
@@ -199,7 +206,7 @@ const ResponsiveNavbar: React.FC<ResponsiveNavbarProps> = ({ children }) => {
               </details>
             </li>
           ) : (
-            ''
+            ""
           )}
         </ul>
       </div>

@@ -19,10 +19,10 @@ const Tabs = () => {
       <Link className="tab tab-bordered hover:tab-active" href="">
         Pemahaman Alkitab
       </Link>
-      <Link className="tab tab-bordered hover:tab-active" href="">
+      <Link className="tab tab-bordered hover:tab-active" href="/pelayanan/baptis">
         Layanan Baptis
       </Link>
-      <Link className="tab tab-bordered hover:tab-active" href="">
+      <Link className="tab tab-bordered hover:tab-active" href="/pelayanan/pernikahan">
         Layanan Pernikahan
       </Link>
     </div>

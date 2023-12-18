@@ -155,10 +155,21 @@ model Karyawan {
   id           Int            @id @default(autoincrement())
   namaDepan    String
   namaTengah   String?
-  status       status         @default(AKTIF)
+  status       Boolean
   namaKeluarga String
   imageURL     String
-  posisi       posisiKaryawan @default(STAFFKANTOR)
+  posisi       posisiKaryawan @default(PENDETA)
+  createdAt    DateTime       @default(now())
+  updatedAt    DateTime       @updatedAt
+}
+
+model Pendeta {
+  id           Int            @id @default(autoincrement())
+  namaDepan    String
+  namaTengah   String?
+  status       status @default(AKTIF)
+  namaKeluarga String
+  imageURL     String
   createdAt    DateTime       @default(now())
   updatedAt    DateTime       @updatedAt
 }

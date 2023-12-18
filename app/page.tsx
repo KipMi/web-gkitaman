@@ -1,16 +1,16 @@
-'use client';
+"use client";
 
-import { url } from 'inspector';
-import Image from 'next/image';
-import churchbg from './assets/img/gkitcbg.webp';
-import KaryawanCard from './components/KaryawanCard';
-import ScrollButton from './components/ScrollButton';
-import { useRef } from 'react';
-import ReadMoreLess from './ReadMoreLess';
-import KegiatanTerkini from './KegiatanTerkini';
-import KomisiKami from './KomisiKami';
-import CarouselGallery from './CarouselGallery';
-import RenunganComponent from './RenunganComponent';
+import { url } from "inspector";
+import Image from "next/image";
+import churchbg from "./assets/img/gkitcbg.webp";
+import KaryawanCard from "./components/KaryawanCard";
+import ScrollButton from "./components/ScrollButton";
+import { useRef } from "react";
+import ReadMoreLess from "./ReadMoreLess";
+import KegiatanTerkini from "./KegiatanTerkini";
+import KomisiKami from "./KomisiKami";
+import CarouselGallery from "./CarouselGallery";
+import RenunganComponent from "./RenunganComponent";
 
 export default function Home() {
   const refScroll = useRef<null | HTMLDivElement>(null);
@@ -65,6 +65,7 @@ export default function Home() {
               </p>
             </div>
           </div>
+          <h1 className="font-bold">Pendeta Kami</h1>
           <CarouselGallery />
         </div>
         <div className="h-auto px-20 flex flex-col items-center my-52">

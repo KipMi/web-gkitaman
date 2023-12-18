@@ -1,17 +1,17 @@
-import React from 'react';
-import Image from 'next/image';
-import pbg from '../assets/img/pf.jpg';
+import React from "react";
+import Image from "next/image";
+import pbg from "../assets/img/pf.jpg";
 
 type KaryawanCardProps = {
   name: string;
-  imgUrl: any;
+  imgUrl: string;
 };
 
 const KaryawanCard = (props: KaryawanCardProps) => {
   return (
     <div className="card w-64 h-80 bg-base-100 shadow-xl m-5">
       <figure>
-        <Image src={pbg} alt="nope" className="rounded-xl" />
+        <img src={props.imgUrl} alt="no data" className="rounded-xl" />
       </figure>
       <div className="card-body items-center text-center">
         <h1>{props.name}</h1>
