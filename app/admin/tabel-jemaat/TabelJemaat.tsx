@@ -24,8 +24,22 @@ interface jemaatType {
 }
 
 const TabelJemaat = () => {
-  const { data: allJemaat, loading, error } = useFetchData<jemaatType>(url);
-  // const [allJemaat, setAllJemaat] = useState<jemaatType[]>([]);
+  // const { data: allJemaat, loading, error } = useFetchData<jemaatType>(url);
+
+  
+  const [allJemaat, setAllJemaat] = useState<jemaatType[]>([]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(url);
+        setAllJemaat(response.data);
+      } catch (error: any) {
+        console.error('Error fetching data:', error.message);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const router = useRouter();
 
