@@ -16,8 +16,8 @@ export default function Home() {
   const refScroll = useRef<null | HTMLDivElement>(null);
 
   return (
-    <main>
-      <div className="h-auto">
+    <main className="w-screen">
+      <div className="w-full h-auto">
         <div className="w-full h-screen bg-cover bg-gradient-to-t from-base-100 from-5% to-gray-500 to-50% relative items-center flex flex-col justify-center">
           <Image
             src={churchbg}

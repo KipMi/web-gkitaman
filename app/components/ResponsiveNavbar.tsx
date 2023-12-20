@@ -95,13 +95,8 @@ const ResponsiveNavbar: React.FC<ResponsiveNavbarProps> = ({ children }) => {
                     <li>
                       <Link href={"/sejarah"}>Sejarah</Link>
                     </li>
-
                     <li>
-                      <Link href={""}>Kontak Kami</Link>
-                    </li>
-
-                    <li>
-                      <Link href={""}>Yayasan</Link>
+                      <Link href={"/yayasan"}>Yayasan</Link>
                     </li>
                   </ul>
                 </details>
@@ -157,26 +152,38 @@ const ResponsiveNavbar: React.FC<ResponsiveNavbarProps> = ({ children }) => {
           {/* Sidebar content here */}
           Main Tabs
           <li className="font-normal">
-            <Link href="/">Home</Link>
+            <Link href="/" aria-label="close sidebar">
+              Home
+            </Link>
           </li>
           <li className="font-normal">
-            <Link href="/pelayanan/umum">Pelayanan</Link>
+            <Link href="/pelayanan/umum" aria-label="close sidebar">
+              Pelayanan
+            </Link>
           </li>
           <li className="font-normal">
-            <Link href="/kegiatan/anak">Kegiatan</Link>
+            <Link href="/kegiatan/anak" aria-label="close sidebar">
+              Kegiatan
+            </Link>
           </li>
           <li>
             <details className="dropdown">
               <summary>Tentang Kami</summary>
               <ul>
                 <li>
-                  <Link href="/pendeta">Pendeta Kami</Link>
+                  <Link href="/pendeta" aria-label="close sidebar">
+                    Pendeta Kami
+                  </Link>
                 </li>
                 <li>
-                  <Link href={""}>Sejarah</Link>
+                  <Link href={"/sejarah"} aria-label="close sidebar">
+                    Sejarah
+                  </Link>
                 </li>
                 <li>
-                  <Link href={""}>Kontak Kami</Link>
+                  <Link href={""} aria-label="close sidebar">
+                    Kontak Kami
+                  </Link>
                 </li>
               </ul>
             </details>
@@ -186,21 +193,42 @@ const ResponsiveNavbar: React.FC<ResponsiveNavbarProps> = ({ children }) => {
               <details className="dropdown">
                 <summary>Admin Tabs</summary>
                 <ul>
+                  {(role === "ADMIN" || role === "SUPERADMIN") && (
+                    <li className="font-normal">
+                      <Link href="/admin/tabel-jemaat">Pendataan Jemaat</Link>
+                    </li>
+                  )}
+
                   <li className="font-normal">
-                    <Link href="/admin/tabel-jemaat">Pendataan Jemaat</Link>
-                  </li>
-                  <li className="font-normal">
-                    <Link href="/admin/kelola-kegiatan">
+                    <Link
+                      href="/admin/kelola-kegiatan"
+                      aria-label="close sidebar"
+                    >
                       Pengelolaan Kegiatan
                     </Link>
                   </li>
-                  <li className="font-normal">
-                    <Link href="/admin/kelola-pelayanan/umum">
-                      Pengelolaan Pelayanan
-                    </Link>
-                  </li>
+                  {(role === "ADMIN" || role === "SUPERADMIN") && (
+                    <li className="font-normal">
+                      <Link
+                        href="/admin/kelola-pelayanan/umum"
+                        aria-label="close sidebar"
+                      >
+                        Pengelolaan Pelayanan
+                      </Link>
+                    </li>
+                  )}
+
+                  {(role === "ADMIN" || role === "SUPERADMIN") && (
+                    <li className="font-normal">
+                      <Link href="/admin/add-user" aria-label="close sidebar">
+                        User Management
+                      </Link>
+                    </li>
+                  )}
                   <li>
-                    <button onClick={logout}>Logout</button>
+                    <button onClick={logout} aria-label="close sidebar">
+                      Logout
+                    </button>
                   </li>
                 </ul>
               </details>
