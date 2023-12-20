@@ -1,9 +1,10 @@
-'use client';
+"use client";
 
-import usePersekutuanDoaStore from '@/app/store/usePersekutuanDoaStore';
-import axios from 'axios';
-import React, { useState } from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import useAuth from "@/app/hooks/useAuth";
+import usePersekutuanDoaStore from "@/app/store/usePersekutuanDoaStore";
+import axios from "axios";
+import React, { useState } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 const url = `${apiUrl}/doa`;
 
@@ -16,6 +17,8 @@ type FormData = {
 };
 
 const FormPersekutuanDoa = () => {
+  const { isLoggedIn, role, username } = useAuth();
+
   const { updateCard } = usePersekutuanDoaStore();
 
   const {
@@ -49,12 +52,37 @@ const FormPersekutuanDoa = () => {
       waktuSelesai: new Date(selesaiDate),
     };
 
-    const response = await axios.patch(url + `/${category}`, doa);
-    console.log('Form submitted', response.data);
+    const checkDoa = await axios.get(url);
+    const doaData = checkDoa.data;
 
-    reset();
+    if (doaData && Array.isArray(data) && data.length > 0) {
+      const doa = {
+        tema,
+        pemimpin,
+        waktuMulai: new Date(mulaiDate),
+        waktuSelesai: new Date(selesaiDate),
+      };
 
-    setSubmissionMessage('Data has been submitted successfully');
+      const response = await axios.patch(url + `/${category}`, doa);
+      console.log("Form submitted", response.data);
+
+      reset();
+    } else {
+      const doa = {
+        category,
+        tema,
+        pemimpin,
+        waktuMulai: new Date(mulaiDate),
+        waktuSelesai: new Date(selesaiDate),
+      };
+
+      const response = await axios.post(url);
+      console.log("Form submitted", response.data, doa);
+
+      reset();
+    }
+
+    setSubmissionMessage("Data has been submitted successfully");
 
     setTimeout(() => {
       setSubmissionMessage(null);
@@ -69,7 +97,7 @@ const FormPersekutuanDoa = () => {
     >
       <div className="w-full">
         <select
-          {...register('category', { required: 'Category is required' })}
+          {...register("category", { required: "Category is required" })}
           id="category"
           className="input input-bordered w-full"
         >
@@ -82,7 +110,7 @@ const FormPersekutuanDoa = () => {
           <span className="label-text">Tema Doa</span>
         </label>
         <input
-          {...register('tema', { required: 'Tema is required' })}
+          {...register("tema", { required: "Tema is required" })}
           type="text"
           id="tema"
           className="input input-bordered w-full"
@@ -93,7 +121,7 @@ const FormPersekutuanDoa = () => {
           <span className="label-text">Dipimpin Oleh</span>
         </label>
         <input
-          {...register('pemimpin', { required: 'Dipimpin is required' })}
+          {...register("pemimpin", { required: "Dipimpin is required" })}
           type="text"
           id="pemimpin"
           className="input input-bordered w-full"
@@ -105,14 +133,14 @@ const FormPersekutuanDoa = () => {
             <span className="label-text">Waktu Pelaksanaan</span>
           </label>
           <input
-            {...register('waktuMulai', { required: 'Waktu mulai is required' })}
+            {...register("waktuMulai", { required: "Waktu mulai is required" })}
             type="time"
             id="waktuMulai"
             className="input input-bordered w-1/2"
           />
           <input
-            {...register('waktuSelesai', {
-              required: 'Waktu selesai is required',
+            {...register("waktuSelesai", {
+              required: "Waktu selesai is required",
             })}
             type="time"
             id="waktuSelesai"
