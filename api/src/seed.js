@@ -64,11 +64,11 @@ async function seed() {
       },
     });
 
-    const hashedPassword = await bcrypt.hash("super123", 10);
     await prisma.user.create({
       data: {
         username: "superadmin",
-        password: hashedPassword,
+        password:
+          "$2a$12$pBQFu2o5NbHusByqUKX6vu3ub/N./VguZk.sFkLortAfMrYKXDAgi",
         role: "SUPERADMIN",
       },
     });
