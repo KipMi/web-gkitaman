@@ -1,8 +1,9 @@
-'use client';
+"use client";
 
-import axios from 'axios';
-import React from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import useAuth from "@/app/hooks/useAuth";
+import axios from "axios";
+import React from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 const url = `${apiUrl}/renungan`;
 
@@ -14,6 +15,8 @@ type FormData = {
 };
 
 const FormRenunganHarian = () => {
+  const { isLoggedIn, role, username } = useAuth();
+
   const {
     register,
     handleSubmit,
@@ -34,13 +37,13 @@ const FormRenunganHarian = () => {
     const checkRenungan = await axios.get(url);
 
     if (checkRenungan.data.length) {
-      const response = await axios.patch(url + '/1', renungan);
+      const response = await axios.patch(url + "/1", renungan);
 
-      console.log('Form submitted', response.data);
+      console.log("Form submitted", response.data);
     } else {
       const response = await axios.post(url, renungan);
 
-      console.log('Form submitted new data created', response.data);
+      console.log("Form submitted new data created", response.data);
     }
 
     // if (checkRenungan) {
@@ -55,7 +58,7 @@ const FormRenunganHarian = () => {
           <span>Judul Renungan</span>
         </label>
         <input
-          {...register('title')}
+          {...register("title")}
           type="text"
           id="title"
           className="input input-bordered w-full"
@@ -64,7 +67,7 @@ const FormRenunganHarian = () => {
           <span className="label-text">Kitab</span>
         </label>
         <input
-          {...register('kitab')}
+          {...register("kitab")}
           type="text"
           id="kitab"
           className="input input-bordered w-full"
@@ -73,7 +76,7 @@ const FormRenunganHarian = () => {
           <span className="label-text">Ayat</span>
         </label>
         <textarea
-          {...register('ayat')}
+          {...register("ayat")}
           id="ayat"
           className="textarea textarea-bordered block w-full"
         />
@@ -81,7 +84,7 @@ const FormRenunganHarian = () => {
           <span className="label-text">Isi Renungan</span>
         </label>
         <textarea
-          {...register('content')}
+          {...register("content")}
           id="content"
           className="textarea textarea-bordered block w-full"
         />

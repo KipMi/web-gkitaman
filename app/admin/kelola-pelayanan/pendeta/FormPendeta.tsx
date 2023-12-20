@@ -1,5 +1,6 @@
 "use client";
 
+import useAuth from "@/app/hooks/useAuth";
 import axios from "axios";
 import React from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -15,6 +16,8 @@ type FormData = {
 };
 
 const FormPendeta = () => {
+  const { isLoggedIn, role, username } = useAuth();
+
   const { register, handleSubmit, reset } = useForm<FormData>();
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     const { namaDepan, namaKeluarga, namaTengah, imageURL, status } = data;

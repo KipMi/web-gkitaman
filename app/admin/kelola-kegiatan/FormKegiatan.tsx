@@ -20,7 +20,7 @@ const FormKegiatan = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [role, setRole] = useState();
   const [hasFetchData, setHasFetchData] = useState(false);
-
+  const router = useRouter();
   useEffect(() => {
     const checkLoggedIn = async () => {
       try {
@@ -35,6 +35,7 @@ const FormKegiatan = () => {
       } catch (error) {
         setIsLoggedIn(false);
         console.log("User is not logged in");
+        router.push("/");
       }
 
       console.log(isLoggedIn);
@@ -43,9 +44,7 @@ const FormKegiatan = () => {
     if (!hasFetchData) {
       checkLoggedIn();
     }
-  }, [hasFetchData, isLoggedIn, role]);
-
-  const router = useRouter();
+  }, [hasFetchData, isLoggedIn, role, router]);
 
   const onSubmit = async (data: FormValues) => {
     console.log("Form submitted", data);

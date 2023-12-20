@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 const apiURL = process.env.NEXT_PUBLIC_API_URL;
 const url = `${apiURL}/auth`;
 
@@ -9,6 +10,7 @@ const KelolaPelayananTabs = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [role, setRole] = useState();
   const [hasFetchData, setHasFetchData] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     const checkLoggedIn = async () => {
@@ -24,6 +26,7 @@ const KelolaPelayananTabs = () => {
       } catch (error) {
         setIsLoggedIn(false);
         console.log("User is not logged in");
+        router.push("/");
       }
 
       console.log(isLoggedIn);
