@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { useRouter } from 'next/navigation';
-import Link from 'next/link';
-import useFetchData from '@/app/hooks/useFetchData';
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
+// import useFetchData from "@/app/hooks/useFetchData";
 const apiURL = process.env.NEXT_PUBLIC_API_URL;
 const url = `${apiURL}/jemaats`;
 
@@ -26,15 +26,15 @@ interface jemaatType {
 const TabelJemaat = () => {
   // const { data: allJemaat, loading, error } = useFetchData<jemaatType>(url);
 
-  
   const [allJemaat, setAllJemaat] = useState<jemaatType[]>([]);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(url);
         setAllJemaat(response.data);
       } catch (error: any) {
-        console.error('Error fetching data:', error.message);
+        console.error("Error fetching data:", error.message);
       }
     };
 
@@ -44,14 +44,18 @@ const TabelJemaat = () => {
   const router = useRouter();
 
   const onDelete = async (id: number) => {
-    const delUrl = url.concat('/', id.toString());
-    console.log(delUrl);
-    await axios
-      .delete(delUrl)
-      .then((res) => console.log(res.status))
-      .catch((err) => console.log(err.message));
+    try {
+      const delUrl = url.concat("/", id.toString());
+      console.log(delUrl);
+      await axios
+        .delete(delUrl)
+        .then((res) => console.log(res.status))
+        .catch((err) => console.log(err.message));
 
-    router.refresh();
+      router.refresh();
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   // useEffect(() => {
@@ -96,7 +100,7 @@ const TabelJemaat = () => {
               <td>{jemaat.noTelpRumah}</td>
               <td>{jemaat.tempatLahir}</td>
               <td>
-                {new Date(jemaat.tanggalLahir).toLocaleDateString('en-GB')}
+                {new Date(jemaat.tanggalLahir).toLocaleDateString("en-GB")}
               </td>
               <td>{jemaat.golonganDarah}</td>
               <td>{jemaat.alamatRumah}</td>
@@ -110,7 +114,7 @@ const TabelJemaat = () => {
                 </Link>
                 <button
                   className="btn btn-error btn-sm"
-                  onClick={(e) => onDelete(jemaat.id)}
+                  // onClick={(e) => onDelete(jemaat.id)}
                 >
                   Delete
                 </button>

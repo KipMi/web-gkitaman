@@ -1,9 +1,6 @@
 import React from "react";
-import axios from "axios";
 import Link from "next/link";
 import TabelJemaat from "./TabelJemaat";
-const apiURL = process.env.NEXT_PUBLIC_API_URL;
-const url = `${apiURL}/jemaats`;
 
 interface jemaatType {
   id: number;
@@ -21,7 +18,6 @@ interface jemaatType {
 }
 
 const TabelJemaatPage = async () => {
-  const jemaatData = (await axios.get(url)).data;
   return (
     <div className="m-10 h-auto min-h-screen">
       <h1 className="text-2xl">Tabel Pendataan Jemaat</h1>
