@@ -1,18 +1,19 @@
 // seed.js
 
-const { PrismaClient } = require('@prisma/client');
+const { PrismaClient } = require("@prisma/client");
 const prisma = new PrismaClient();
+const bcrypt = require("bcrypt");
 
 async function seed() {
   try {
     // Insert default data for category 'umum'
     await prisma.ibadah.create({
       data: {
-        category: 'umum',
-        temaIbadah: 'Default Umum Theme',
-        pemimpin: 'Default Pemimpin',
-        linkVideo: 'Default Link Video',
-        infoTambahan: 'Default Info Tambahan',
+        category: "umum",
+        temaIbadah: "Default Umum Theme",
+        pemimpin: "Default Pemimpin",
+        linkVideo: "Default Link Video",
+        infoTambahan: "Default Info Tambahan",
         waktuMulai: new Date(),
         waktuSelesai: new Date(),
       },
@@ -20,11 +21,11 @@ async function seed() {
 
     await prisma.ibadah.create({
       data: {
-        category: 'remaja',
-        temaIbadah: 'Default Remaja Theme',
-        pemimpin: 'Default Pemimpin',
-        linkVideo: 'Default Link Video',
-        infoTambahan: 'Default Info Tambahan',
+        category: "remaja",
+        temaIbadah: "Default Remaja Theme",
+        pemimpin: "Default Pemimpin",
+        linkVideo: "Default Link Video",
+        infoTambahan: "Default Info Tambahan",
         waktuMulai: new Date(),
         waktuSelesai: new Date(),
       },
@@ -32,11 +33,11 @@ async function seed() {
 
     await prisma.ibadah.create({
       data: {
-        category: 'pemuda',
-        temaIbadah: 'Default Pemuda Theme',
-        pemimpin: 'Default Pemimpin',
-        linkVideo: 'Default Link Video',
-        infoTambahan: 'Default Info Tambahan',
+        category: "pemuda",
+        temaIbadah: "Default Pemuda Theme",
+        pemimpin: "Default Pemimpin",
+        linkVideo: "Default Link Video",
+        infoTambahan: "Default Info Tambahan",
         waktuMulai: new Date(),
         waktuSelesai: new Date(),
       },
@@ -44,11 +45,11 @@ async function seed() {
 
     await prisma.ibadah.create({
       data: {
-        category: 'sekolahMinggu',
-        temaIbadah: 'Default Sekolah Minggu Theme',
-        pemimpin: 'Default Pemimpin',
-        linkVideo: 'Default Link Video',
-        infoTambahan: 'Default Info Tambahan',
+        category: "sekolahMinggu",
+        temaIbadah: "Default Sekolah Minggu Theme",
+        pemimpin: "Default Pemimpin",
+        linkVideo: "Default Link Video",
+        infoTambahan: "Default Info Tambahan",
         waktuMulai: new Date(),
         waktuSelesai: new Date(),
       },
@@ -56,18 +57,26 @@ async function seed() {
 
     await prisma.renungan.create({
       data: {
-        title: 'Default',
-        kitab: 'Default',
-        ayat: 'Default',
-        content: 'Default',
+        title: "Default",
+        kitab: "Default",
+        ayat: "Default",
+        content: "Default",
       },
     });
 
+    const hashedPassword = await bcrypt.hash("super123", 10);
+    await prisma.user.create({
+      data: {
+        username: "superadmin",
+        password: hashedPassword,
+        role: "SUPERADMIN",
+      },
+    });
     // Repeat the process for other categories...
 
-    console.log('Seed completed successfully');
+    console.log("Seed completed successfully");
   } catch (error) {
-    console.error('Error during seeding:', error);
+    console.error("Error during seeding:", error);
   } finally {
     await prisma.$disconnect();
   }
