@@ -1,11 +1,13 @@
-'use client';
+"use client";
 
-import axios from 'axios';
-import React, { useState, useEffect } from 'react';
+import axios from "axios";
+import Link from "next/link";
+import React, { useState, useEffect } from "react";
 const apiURL = process.env.NEXT_PUBLIC_API_URL;
 const url = `${apiURL}/kegiatans`;
 
 interface repoType {
+  id: number;
   judulKegiatan: string;
   deskripsiKegiatan: string;
   komisi: string;
@@ -14,13 +16,17 @@ interface repoType {
 const TabelKegiatan = () => {
   const [allKegiatan, setAllKegiatan] = useState<repoType[]>([]);
 
+  const onDelete = async (id: number) => {
+    const response = await axios.delete(`${url}/${id}`);
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const response = await axios.get(url);
         setAllKegiatan(response.data);
       } catch (error: any) {
-        console.error('Error fetching data:', error.message);
+        console.error("Error fetching data:", error.message);
       }
     };
 
@@ -50,8 +56,18 @@ const TabelKegiatan = () => {
                 </td>
                 <td>{items.komisi}</td>
                 <td className="flex justify-around">
-                  <button className="btn btn-info btn-sm">Edit</button>
-                  <button className="btn btn-error btn-sm">Delete</button>
+                  <Link
+                    className="btn btn-info btn-sm"
+                    href={`/admin/kelola-kegiatan/${items.id}`}
+                  >
+                    Edit
+                  </Link>
+                  <button
+                    className="btn btn-error btn-sm"
+                    onClick={(e) => onDelete(items.id)}
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
             );

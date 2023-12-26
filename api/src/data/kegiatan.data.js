@@ -1,4 +1,4 @@
-const prisma = require('../db');
+const prisma = require("../db");
 
 const findKegiatans = async () => {
   const kegiatans = await prisma.kegiatan.findMany();
@@ -9,7 +9,7 @@ const findKegiatans = async () => {
 const findKegiatanById = async (id) => {
   const kegiatan = await prisma.kegiatan.findUnique({
     where: {
-      id,
+      id: parseInt(id),
     },
   });
 
