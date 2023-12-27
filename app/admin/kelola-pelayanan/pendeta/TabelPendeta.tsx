@@ -1,11 +1,13 @@
 "use client";
 
 import axios from "axios";
+import Link from "next/link";
 import React, { useState, useEffect } from "react";
 const apiURL = process.env.NEXT_PUBLIC_API_URL;
 const url = `${apiURL}/pendeta`;
 
 interface repoType {
+  id: number;
   namaDepan: string;
   namaTengah: string;
   namaKeluarga: string;
@@ -49,7 +51,12 @@ const TabelPendeta = () => {
                 </td>
                 <td className="w-1/2 overflow-clip">{items.status}</td>
                 <td className="flex justify-around">
-                  <button className="btn btn-info btn-sm">Edit</button>
+                  <Link
+                    href={`pendeta/${items.id}`}
+                    className="btn btn-info btn-sm"
+                  >
+                    Edit
+                  </Link>
                   <button className="btn btn-error btn-sm">Delete</button>
                 </td>
               </tr>

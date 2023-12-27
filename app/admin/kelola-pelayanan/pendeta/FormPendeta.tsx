@@ -21,6 +21,7 @@ const FormPendeta = () => {
   const { register, handleSubmit, reset } = useForm<FormData>();
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     const { namaDepan, namaKeluarga, namaTengah, imageURL, status } = data;
+    console.log(data);
     try {
       //   const pendeta = {
       //     namaDepan,
@@ -35,9 +36,9 @@ const FormPendeta = () => {
       formData.append("namaDepan", data.namaDepan);
       formData.append("namaTengah", data.namaTengah);
       formData.append("namaKeluarga", data.namaKeluarga);
-      formData.append("status", JSON.parse(data.status.toLowerCase()));
+      formData.append("status", data.status);
 
-      console.log(JSON.parse(data.status.toLowerCase()));
+      // console.log(JSON.parse(data.status.toLowerCase()));
 
       const file = data.imageURL[0];
       console.log(file);

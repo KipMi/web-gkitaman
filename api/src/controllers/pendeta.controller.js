@@ -15,7 +15,7 @@ router.get("/:id", async (req, res) => {
     const karyawanId = req.params.id;
     const karyawan = await prisma.pendeta.findUnique({
       where: {
-        id: karyawanId,
+        id: parseInt(karyawanId),
       },
     });
 
@@ -54,6 +54,48 @@ router.post("/", upload.single("imageURL"), async (req, res) => {
     });
   } catch (error) {
     res.status(500).send(error);
+  }
+});
+
+router.patch("/:id", async (req, res) => {
+  try {
+    const pendetaId = req.params.id;
+    const pendetaData = req.body;
+
+    const pendeta = await prisma.pendeta.update({
+      where: {
+        id: parseInt(pendetaId),
+      },
+      data: {
+        namaDepan: pendetaData.namaDepan,
+        namaTengah: pendetaData.namaTengah,
+        namaKeluarga: pendetaData.namaKeluarga,
+        imageURL: pendetaData.imageURL,
+        status: pendetaData.status,
+      },
+    });
+
+    res.send({
+      data: pendeta,
+      message: "Data updated successfully",
+    });
+  } catch (error) {
+    res.status(400).send(error);
+  }
+});
+
+router.delete("/:id", async (req, res) => {
+  const pendetaId = req.params.id;
+
+  try {
+    await prisma.pendeta.delete({
+      where: {
+        id: parseInt(pendetaId),
+      },
+    });
+    res.send("Data deleted successfully");
+  } catch (error) {
+    res.status(400).send(error);
   }
 });
 
