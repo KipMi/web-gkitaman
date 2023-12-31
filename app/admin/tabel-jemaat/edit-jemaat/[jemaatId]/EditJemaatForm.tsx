@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import React, { useEffect } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
 
 type EditFormValues = {
   noAnggota: string;
@@ -21,6 +21,9 @@ type EditFormValues = {
   namaTengahIbu: string;
   namaKeluargaIbu: string;
   noAnggotaIbu: string;
+  pekerjaan: string;
+  jabatan: string;
+  perusahaan: string;
 };
 
 type JemaatType = {
@@ -37,6 +40,9 @@ type JemaatType = {
   golonganDarah: string;
   alamatRumah: string;
   wilayah: string;
+  pekerjaan: string;
+  jabatan: string;
+  perusahaan: string;
 };
 
 type OrangTuaType = {
@@ -69,31 +75,34 @@ const EditJemaatForm = ({
 
   useEffect(() => {
     if (jemaat) {
-      setValue('noAnggota', jemaat.noAnggota.toString());
-      setValue('namaDepan', jemaat.namaDepan);
-      setValue('namaTengah', jemaat.namaTengah);
-      setValue('namaKeluarga', jemaat.namaKeluarga);
-      setValue('noWA', jemaat.noWA.toString());
-      setValue('noTelpRumah', jemaat.noTelpRumah.toString());
-      setValue('tempatLahir', jemaat.tempatLahir);
-      setValue('tanggalLahir', jemaat.tanggalLahir);
-      setValue('alamatRumah', jemaat.alamatRumah);
-      setValue('golonganDarah', jemaat.golonganDarah);
-      setValue('wilayah', jemaat.wilayah);
+      setValue("noAnggota", jemaat.noAnggota.toString());
+      setValue("namaDepan", jemaat.namaDepan);
+      setValue("namaTengah", jemaat.namaTengah);
+      setValue("namaKeluarga", jemaat.namaKeluarga);
+      setValue("noWA", jemaat.noWA.toString());
+      setValue("noTelpRumah", jemaat.noTelpRumah.toString());
+      setValue("tempatLahir", jemaat.tempatLahir);
+      setValue("tanggalLahir", jemaat.tanggalLahir);
+      setValue("alamatRumah", jemaat.alamatRumah);
+      setValue("golonganDarah", jemaat.golonganDarah);
+      setValue("wilayah", jemaat.wilayah);
+      setValue("pekerjaan", jemaat.pekerjaan);
+      setValue("jabatan", jemaat.jabatan);
+      setValue("perusahaan", jemaat.perusahaan);
     }
 
     if (ayah) {
-      setValue('namaDepanAyah', ayah.namaDepan);
-      setValue('namaTengahAyah', ayah.namaTengah);
-      setValue('namaKeluargaAyah', ayah.namaDepan);
-      setValue('noAnggotaAyah', ayah.noAnggota?.toString() || '');
+      setValue("namaDepanAyah", ayah.namaDepan);
+      setValue("namaTengahAyah", ayah.namaTengah);
+      setValue("namaKeluargaAyah", ayah.namaDepan);
+      setValue("noAnggotaAyah", ayah.noAnggota?.toString() || "");
     }
 
     if (ibu) {
-      setValue('namaDepanIbu', ibu.namaDepan);
-      setValue('namaTengahIbu', ibu.namaTengah);
-      setValue('namaKeluargaIbu', ibu.namaDepan);
-      setValue('noAnggotaIbu', ibu.noAnggota?.toString() || '');
+      setValue("namaDepanIbu", ibu.namaDepan);
+      setValue("namaTengahIbu", ibu.namaTengah);
+      setValue("namaKeluargaIbu", ibu.namaDepan);
+      setValue("noAnggotaIbu", ibu.noAnggota?.toString() || "");
     }
   }, [jemaat, ayah, ibu, onSubmit]);
 
@@ -114,8 +123,8 @@ const EditJemaatForm = ({
             </span>
           </label>
           <input
-            {...register('noAnggota', {
-              required: 'No. Anggota is required',
+            {...register("noAnggota", {
+              required: "No. Anggota is required",
             })}
             className="input input-bordered w-full"
             placeholder="No. Anggota"
@@ -130,7 +139,7 @@ const EditJemaatForm = ({
             </span>
           </label>
           <input
-            {...register('namaDepan', { required: 'Nama Depan is required' })}
+            {...register("namaDepan", { required: "Nama Depan is required" })}
             className="input input-bordered w-full"
             placeholder="Nama Depan"
             type="text"
@@ -142,7 +151,7 @@ const EditJemaatForm = ({
             <span className="label-text">Nama Tengah</span>
           </label>
           <input
-            {...register('namaTengah')}
+            {...register("namaTengah")}
             className="input input-bordered w-full"
             placeholder="Nama Tengah"
             type="text"
@@ -156,8 +165,8 @@ const EditJemaatForm = ({
             </span>
           </label>
           <input
-            {...register('namaKeluarga', {
-              required: 'Nama Keluarga is required',
+            {...register("namaKeluarga", {
+              required: "Nama Keluarga is required",
             })}
             className="input input-bordered w-full"
             placeholder="Nama Keluarga"
@@ -172,7 +181,7 @@ const EditJemaatForm = ({
             </span>
           </label>
           <input
-            {...register('noWA', { required: 'Nomor WA is required' })}
+            {...register("noWA", { required: "Nomor WA is required" })}
             type="number"
             id="noWA"
             className="input input-bordered w-full"
@@ -186,8 +195,8 @@ const EditJemaatForm = ({
             </span>
           </label>
           <input
-            {...register('noTelpRumah', {
-              required: 'Nomor Telepon Rumah is required',
+            {...register("noTelpRumah", {
+              required: "Nomor Telepon Rumah is required",
             })}
             type="number"
             id="noTelpRumah"
@@ -202,8 +211,8 @@ const EditJemaatForm = ({
             </span>
           </label>
           <input
-            {...register('tempatLahir', {
-              required: 'Tempat Lahir is required',
+            {...register("tempatLahir", {
+              required: "Tempat Lahir is required",
             })}
             type="text"
             id="tempatLahir"
@@ -219,7 +228,7 @@ const EditJemaatForm = ({
                 <span className="label-text">Nama Depan Ayah</span>
               </label>
               <input
-                {...register('namaDepanAyah')}
+                {...register("namaDepanAyah")}
                 type="text"
                 id="namaDepanAyah"
                 className="input input-bordered w-full"
@@ -230,7 +239,7 @@ const EditJemaatForm = ({
                 <span className="label-text">Nama Tengah Ayah</span>
               </label>
               <input
-                {...register('namaTengahAyah')}
+                {...register("namaTengahAyah")}
                 type="text"
                 id="namaTengahAyah"
                 className="input input-bordered w-full"
@@ -241,7 +250,7 @@ const EditJemaatForm = ({
                 <span className="label-text">Nama Keluarga Ayah</span>
               </label>
               <input
-                {...register('namaKeluargaAyah')}
+                {...register("namaKeluargaAyah")}
                 type="text"
                 id="namaKeluargaAyah"
                 className="input input-bordered w-full"
@@ -252,7 +261,7 @@ const EditJemaatForm = ({
             <span className="label-text">No. Anggota Ayah</span>
           </label>
           <input
-            {...register('noAnggotaAyah')}
+            {...register("noAnggotaAyah")}
             type="number"
             id="noAnggotaAyah"
             className="input input-bordered w-full"
@@ -264,7 +273,7 @@ const EditJemaatForm = ({
                 <span className="label-text">Nama Depan Ibu</span>
               </label>
               <input
-                {...register('namaDepanIbu')}
+                {...register("namaDepanIbu")}
                 type="text"
                 id="namaDepanIbu"
                 className="input input-bordered w-full"
@@ -275,7 +284,7 @@ const EditJemaatForm = ({
                 <span className="label-text">Nama Tengah Ibu</span>
               </label>
               <input
-                {...register('namaTengahIbu')}
+                {...register("namaTengahIbu")}
                 type="text"
                 id="namaTengahIbu"
                 className="input input-bordered w-full"
@@ -286,7 +295,7 @@ const EditJemaatForm = ({
                 <span className="label-text">Nama Keluarga Ibu</span>
               </label>
               <input
-                {...register('namaKeluargaIbu')}
+                {...register("namaKeluargaIbu")}
                 type="text"
                 id="namaKeluargaIbu"
                 className="input input-bordered w-full"
@@ -297,7 +306,7 @@ const EditJemaatForm = ({
             <span className="label-text">No. Anggota Ibu</span>
           </label>
           <input
-            {...register('noAnggotaIbu')}
+            {...register("noAnggotaIbu")}
             type="number"
             id="noAnggotaIbu"
             className="input input-bordered w-full"
@@ -310,7 +319,7 @@ const EditJemaatForm = ({
             </span>
           </label>
           <select
-            {...register('golonganDarah')}
+            {...register("golonganDarah")}
             id="golonganDarah"
             className="input input-bordered w-full"
           >
@@ -327,8 +336,8 @@ const EditJemaatForm = ({
             </span>
           </label>
           <input
-            {...register('tanggalLahir', {
-              required: 'Tanggal Lahir is required',
+            {...register("tanggalLahir", {
+              required: "Tanggal Lahir is required",
             })}
             type="date"
             id="tanggalLahir"
@@ -343,8 +352,8 @@ const EditJemaatForm = ({
             </span>
           </label>
           <input
-            {...register('alamatRumah', {
-              required: 'Alamat Rumah is required',
+            {...register("alamatRumah", {
+              required: "Alamat Rumah is required",
             })}
             type="text"
             id="alamatRumah"
@@ -359,12 +368,48 @@ const EditJemaatForm = ({
             </span>
           </label>
           <input
-            {...register('wilayah', { required: 'Wilayah is required' })}
+            {...register("wilayah", { required: "Wilayah is required" })}
             type="text"
             id="wilayah"
             className="input input-bordered w-full"
             placeholder="Wilayah"
           />
+        </div>
+        <div className="border-2 rounded-md w-full p-5">
+          <h1 className="font-bold">Data Pekerjaan</h1>
+          <div className="w-full">
+            <label htmlFor="pekerjaan" className="label">
+              <span className="label-text">Pekerjaan</span>
+            </label>
+            <input
+              {...register("pekerjaan")}
+              type="text"
+              id="pekerjaan"
+              className="input input-bordered w-full"
+            />
+          </div>
+          <div className="w-full">
+            <label htmlFor="jabatan" className="label">
+              <span className="label-text">Jabatan</span>
+            </label>
+            <input
+              {...register("jabatan")}
+              type="text"
+              id="jabatan"
+              className="input input-bordered w-full"
+            />
+          </div>
+          <div className="w-full">
+            <label htmlFor="perusahaan" className="label">
+              <span className="label-text">Perusahaan</span>
+            </label>
+            <input
+              {...register("perusahaan")}
+              type="text"
+              id="perusahaan"
+              className="input input-bordered w-full"
+            />
+          </div>
         </div>
         <button type="submit" className="btn btn-success">
           Submit

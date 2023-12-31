@@ -107,6 +107,12 @@ const TabelJemaat = () => {
               <td>{jemaat.wilayah}</td>
               <td className="flex justify-around">
                 <Link
+                  href={`./tabel-jemaat/view-jemaat/${jemaat.id}`}
+                  className="btn btn-neutral btn-sm"
+                >
+                  View
+                </Link>
+                <Link
                   href={`./tabel-jemaat/edit-jemaat/${jemaat.id}`}
                   className="btn btn-info btn-sm"
                 >

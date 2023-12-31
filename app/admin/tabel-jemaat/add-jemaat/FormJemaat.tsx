@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import axios from 'axios';
-import { useRouter } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import axios from "axios";
+import { useRouter } from "next/navigation";
+import React, { useEffect, useState } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
 
 const apiURL = process.env.NEXT_PUBLIC_API_URL;
 
@@ -29,6 +29,9 @@ type FormValues = {
   namaKeluargaIbu: string;
   noAnggotaIbu: string;
   isIbuJemaat: boolean;
+  pekerjaan: string;
+  jabatan: string;
+  perusahaan: string;
 };
 
 const AddJemaatForm = () => {
@@ -37,11 +40,11 @@ const AddJemaatForm = () => {
   const { register, handleSubmit, watch, setValue } = useForm<FormValues>();
   const [isLoading, setIsLoading] = useState(false);
 
-  const isAyahJemaat = watch('isAyahJemaat');
-  const isIbuJemaat = watch('isIbuJemaat');
+  const isAyahJemaat = watch("isAyahJemaat");
+  const isIbuJemaat = watch("isIbuJemaat");
 
-  const noAnggotaAyah = watch('noAnggotaAyah');
-  const noAnggotaIbu = watch('noAnggotaIbu');
+  const noAnggotaAyah = watch("noAnggotaAyah");
+  const noAnggotaIbu = watch("noAnggotaIbu");
 
   // useEffect(() => {
   //   const updateAnggotaAyah
@@ -72,6 +75,9 @@ const AddJemaatForm = () => {
       namaTengahIbu,
       namaKeluargaIbu,
       isIbuJemaat,
+      pekerjaan,
+      jabatan,
+      perusahaan,
     } = data;
 
     // console.log(da);
@@ -100,6 +106,9 @@ const AddJemaatForm = () => {
       tanggalLahir: new Date(tanggalLahir),
       alamatRumah,
       wilayah,
+      pekerjaan,
+      jabatan,
+      perusahaan,
     };
 
     console.log(jemaat);
@@ -107,12 +116,12 @@ const AddJemaatForm = () => {
     try {
       const response = await axios.post(`${apiURL}/jemaats`, jemaat);
 
-      alert('Form submitted successfully');
+      alert("Form submitted successfully");
 
-      router.push('/admin/tabel-jemaat');
-      console.log('Form submitted', response.data);
+      router.push("/admin/tabel-jemaat");
+      console.log("Form submitted", response.data);
     } catch (error) {
-      console.error('Error submitting form', error);
+      console.error("Error submitting form", error);
     } finally {
       setIsLoading(false);
     }
@@ -134,8 +143,8 @@ const AddJemaatForm = () => {
             </span>
           </label>
           <input
-            {...register('noAnggota', {
-              required: 'No. Anggota is required',
+            {...register("noAnggota", {
+              required: "No. Anggota is required",
             })}
             className="input input-bordered w-full"
             placeholder="No. Anggota"
@@ -150,7 +159,7 @@ const AddJemaatForm = () => {
             </span>
           </label>
           <input
-            {...register('namaDepan', { required: 'Nama Depan is required' })}
+            {...register("namaDepan", { required: "Nama Depan is required" })}
             className="input input-bordered w-full"
             placeholder="Nama Depan"
             type="text"
@@ -162,7 +171,7 @@ const AddJemaatForm = () => {
             <span className="label-text">Nama Tengah</span>
           </label>
           <input
-            {...register('namaTengah')}
+            {...register("namaTengah")}
             className="input input-bordered w-full"
             placeholder="Nama Tengah"
             type="text"
@@ -176,8 +185,8 @@ const AddJemaatForm = () => {
             </span>
           </label>
           <input
-            {...register('namaKeluarga', {
-              required: 'Nama Keluarga is required',
+            {...register("namaKeluarga", {
+              required: "Nama Keluarga is required",
             })}
             className="input input-bordered w-full"
             placeholder="Nama Keluarga"
@@ -192,7 +201,7 @@ const AddJemaatForm = () => {
             </span>
           </label>
           <input
-            {...register('noWA', { required: 'Nomor WA is required' })}
+            {...register("noWA", { required: "Nomor WA is required" })}
             type="number"
             id="noWA"
             className="input input-bordered w-full"
@@ -206,8 +215,8 @@ const AddJemaatForm = () => {
             </span>
           </label>
           <input
-            {...register('noTelpRumah', {
-              required: 'Nomor Telepon Rumah is required',
+            {...register("noTelpRumah", {
+              required: "Nomor Telepon Rumah is required",
             })}
             type="number"
             id="noTelpRumah"
@@ -222,8 +231,8 @@ const AddJemaatForm = () => {
             </span>
           </label>
           <input
-            {...register('tempatLahir', {
-              required: 'Tempat Lahir is required',
+            {...register("tempatLahir", {
+              required: "Tempat Lahir is required",
             })}
             type="text"
             id="tempatLahir"
@@ -239,7 +248,7 @@ const AddJemaatForm = () => {
                 <span className="label-text">Nama Depan Ayah</span>
               </label>
               <input
-                {...register('namaDepanAyah', { disabled: isAyahJemaat })}
+                {...register("namaDepanAyah", { disabled: isAyahJemaat })}
                 type="text"
                 id="namaDepanAyah"
                 className="input input-bordered w-full"
@@ -250,7 +259,7 @@ const AddJemaatForm = () => {
                 <span className="label-text">Nama Tengah Ayah</span>
               </label>
               <input
-                {...register('namaTengahAyah', { disabled: isAyahJemaat })}
+                {...register("namaTengahAyah", { disabled: isAyahJemaat })}
                 type="text"
                 id="namaTengahAyah"
                 className="input input-bordered w-full"
@@ -261,7 +270,7 @@ const AddJemaatForm = () => {
                 <span className="label-text">Nama Keluarga Ayah</span>
               </label>
               <input
-                {...register('namaKeluargaAyah', { disabled: isAyahJemaat })}
+                {...register("namaKeluargaAyah", { disabled: isAyahJemaat })}
                 type="text"
                 id="namaKeluargaAyah"
                 className="input input-bordered w-full"
@@ -272,7 +281,7 @@ const AddJemaatForm = () => {
             <label htmlFor="isAyahJemaat" className="label cursor-pointer">
               <span className="label-text">Jemaat</span>
               <input
-                {...register('isAyahJemaat')}
+                {...register("isAyahJemaat")}
                 id="isAyahJemaat"
                 type="checkbox"
                 className="checkbox"
@@ -283,7 +292,7 @@ const AddJemaatForm = () => {
             <span className="label-text">No. Anggota Ayah</span>
           </label>
           <input
-            {...register('noAnggotaAyah', { disabled: !isAyahJemaat })}
+            {...register("noAnggotaAyah", { disabled: !isAyahJemaat })}
             type="number"
             id="noAnggotaAyah"
             className="input input-bordered w-full"
@@ -295,7 +304,7 @@ const AddJemaatForm = () => {
                 <span className="label-text">Nama Depan Ibu</span>
               </label>
               <input
-                {...register('namaDepanIbu', { disabled: isIbuJemaat })}
+                {...register("namaDepanIbu", { disabled: isIbuJemaat })}
                 type="text"
                 id="namaDepanIbu"
                 className="input input-bordered w-full"
@@ -306,7 +315,7 @@ const AddJemaatForm = () => {
                 <span className="label-text">Nama Tengah Ibu</span>
               </label>
               <input
-                {...register('namaTengahIbu', { disabled: isIbuJemaat })}
+                {...register("namaTengahIbu", { disabled: isIbuJemaat })}
                 type="text"
                 id="namaTengahIbu"
                 className="input input-bordered w-full"
@@ -317,7 +326,7 @@ const AddJemaatForm = () => {
                 <span className="label-text">Nama Keluarga Ibu</span>
               </label>
               <input
-                {...register('namaKeluargaIbu', { disabled: isIbuJemaat })}
+                {...register("namaKeluargaIbu", { disabled: isIbuJemaat })}
                 type="text"
                 id="namaKeluargaIbu"
                 className="input input-bordered w-full"
@@ -328,7 +337,7 @@ const AddJemaatForm = () => {
             <label htmlFor="isIbuJemaat" className="label cursor-pointer">
               <span className="label-text">Jemaat</span>
               <input
-                {...register('isIbuJemaat')}
+                {...register("isIbuJemaat")}
                 id="isIbuJemaat"
                 type="checkbox"
                 className="checkbox"
@@ -339,7 +348,7 @@ const AddJemaatForm = () => {
             <span className="label-text">No. Anggota Ibu</span>
           </label>
           <input
-            {...register('noAnggotaIbu', { disabled: !isIbuJemaat })}
+            {...register("noAnggotaIbu", { disabled: !isIbuJemaat })}
             type="number"
             id="noAnggotaIbu"
             className="input input-bordered w-full"
@@ -352,7 +361,7 @@ const AddJemaatForm = () => {
             </span>
           </label>
           <select
-            {...register('golonganDarah')}
+            {...register("golonganDarah")}
             id="golonganDarah"
             className="input input-bordered w-full"
           >
@@ -369,8 +378,8 @@ const AddJemaatForm = () => {
             </span>
           </label>
           <input
-            {...register('tanggalLahir', {
-              required: 'Tanggal Lahir is required',
+            {...register("tanggalLahir", {
+              required: "Tanggal Lahir is required",
             })}
             type="date"
             id="tanggalLahir"
@@ -385,8 +394,8 @@ const AddJemaatForm = () => {
             </span>
           </label>
           <input
-            {...register('alamatRumah', {
-              required: 'Alamat Rumah is required',
+            {...register("alamatRumah", {
+              required: "Alamat Rumah is required",
             })}
             type="text"
             id="alamatRumah"
@@ -401,12 +410,48 @@ const AddJemaatForm = () => {
             </span>
           </label>
           <input
-            {...register('wilayah', { required: 'Wilayah is required' })}
+            {...register("wilayah", { required: "Wilayah is required" })}
             type="text"
             id="wilayah"
             className="input input-bordered w-full"
             placeholder="Wilayah"
           />
+        </div>
+        <div className="border-2 rounded-md w-full p-5">
+          <h1 className="font-bold">Data Pekerjaan</h1>
+          <div className="w-full">
+            <label htmlFor="pekerjaan" className="label">
+              <span className="label-text">Pekerjaan</span>
+            </label>
+            <input
+              {...register("pekerjaan")}
+              type="text"
+              id="pekerjaan"
+              className="input input-bordered w-full"
+            />
+          </div>
+          <div className="w-full">
+            <label htmlFor="jabatan" className="label">
+              <span className="label-text">Jabatan</span>
+            </label>
+            <input
+              {...register("jabatan")}
+              type="text"
+              id="jabatan"
+              className="input input-bordered w-full"
+            />
+          </div>
+          <div className="w-full">
+            <label htmlFor="perusahaan" className="label">
+              <span className="label-text">Perusahaan</span>
+            </label>
+            <input
+              {...register("perusahaan")}
+              type="text"
+              id="perusahaan"
+              className="input input-bordered w-full"
+            />
+          </div>
         </div>
         <button className="btn btn-success" disabled={isLoading}>
           {isLoading && <span>Adding...</span>}

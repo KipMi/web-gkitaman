@@ -1,4 +1,4 @@
-const prisma = require('../db');
+const prisma = require("../db");
 
 const findJemaats = async () => {
   const jemaats = await prisma.jemaat.findMany();
@@ -125,9 +125,9 @@ const insertJemaat = async (newJemaatData) => {
     return jemaat;
   } catch (error) {
     if (
-      error.code === 'P2002' &&
+      error.code === "P2002" &&
       error.meta &&
-      error.meta.target.includes('noAnggota')
+      error.meta.target.includes("noAnggota")
     ) {
       throw new Error(
         `Jemaat with noAnggota ${jemaatData.noAnggota} already exists`
@@ -156,6 +156,9 @@ const editJemaat = async (id, jemaatData) => {
       golonganDarah: jemaatData.golonganDarah,
       tanggalLahir: jemaatData.tanggalLahir,
       alamatRumah: jemaatData.alamatRumah,
+      pekerjaan: jemaatData.pekerjaan,
+      jabatan: jemaatData.jabatan,
+      perusahaan: jemaatData.perusahaan,
       wilayah: jemaatData.wilayah,
     },
   });

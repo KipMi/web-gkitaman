@@ -55,6 +55,9 @@ model Jemaat {
   golonganDarah String
   alamatRumah   String
   wilayah       String
+  pekerjaan     String? 
+  jabatan       String?
+  perusahaan    String?
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
   jemaat        OrangTua? @relation("Jemaat")
@@ -164,12 +167,12 @@ model Karyawan {
 }
 
 model Pendeta {
-  id           Int            @id @default(autoincrement())
+  id           Int      @id @default(autoincrement())
   namaDepan    String
   namaTengah   String?
-  status       status @default(AKTIF)
+  status       status   @default(AKTIF)
   namaKeluarga String
   imageURL     String
-  createdAt    DateTime       @default(now())
-  updatedAt    DateTime       @updatedAt
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
 }

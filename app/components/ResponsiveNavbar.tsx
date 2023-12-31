@@ -32,14 +32,14 @@ const ResponsiveNavbar: React.FC<ResponsiveNavbarProps> = ({ children }) => {
 
         console.log("User is logged in", userData);
         setRole(userData.role);
-        console.log(role);
+        // console.log(role);
         setIsLoggedIn(true);
       } catch (error) {
         setIsLoggedIn(false);
         console.log("User is not logged in");
       }
 
-      console.log(isLoggedIn);
+      // console.log(isLoggedIn);
     };
 
     checkLoggedIn();

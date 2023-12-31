@@ -76,14 +76,6 @@ const FormEditKegiatan = ({
     console.log("Form submitted", data);
     console.log(data.imageURL[0]);
     try {
-      //   setValue("judulKegiatan", data.judulKegiatan);
-      //   setValue("komisi", data.komisi);
-      //   setValue("deskripsiKegiatan", data.deskripsiKegiatan);
-      //   const formData = new FormData();
-      //   formData.append("judulKegiatan", data.judulKegiatan);
-      //   formData.append("komisi", data.komisi);
-      //   formData.append("deskripsiKegiatan", data.deskripsiKegiatan);
-
       const response = await axios.patch(`${url}/${id}`, data);
 
       console.log("Form submitted", response.data);
