@@ -1,9 +1,9 @@
-'use client';
+"use client";
 
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
-import { useForm, SubmitHandler } from 'react-hook-form';
-import EditJemaatForm from './EditJemaatForm';
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
+import EditJemaatForm from "./EditJemaatForm";
 const apiURL = process.env.NEXT_PUBLIC_API_URL;
 
 type EditFormValues = {
@@ -26,6 +26,9 @@ type EditFormValues = {
   namaTengahIbu: string;
   namaKeluargaIbu: string;
   noAnggotaIbu: string;
+  pekerjaan: string;
+  jabatan: string;
+  perusahaan: string;
 };
 
 type orangTuaType = {
@@ -51,6 +54,9 @@ type jemaatType = {
   golonganDarah: string;
   alamatRumah: string;
   wilayah: string;
+  pekerjaan: string;
+  jabatan: string;
+  perusahaan: string;
 };
 
 const EditJemaatPage = ({ params }: { params: { jemaatId: number } }) => {
@@ -88,7 +94,7 @@ const EditJemaatPage = ({ params }: { params: { jemaatId: number } }) => {
         setAyah(ayahData);
         setIbu(ibuData);
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
     };
 
@@ -111,14 +117,17 @@ const EditJemaatPage = ({ params }: { params: { jemaatId: number } }) => {
       golonganDarah: data.golonganDarah,
       alamatRumah: data.alamatRumah,
       wilayah: data.wilayah,
+      pekerjaan: data.pekerjaan,
+      jabatan: data.jabatan,
+      perusahaan: data.perusahaan,
     };
 
     console.log(jemaat);
     try {
       const updateJemaatResponse = await axios.patch(jemaatUrl, jemaat);
-      console.log('Jemaat updated:', updateJemaatResponse.data);
+      console.log("Jemaat updated:", updateJemaatResponse.data);
     } catch (error) {
-      console.error('Error updating jemaat:', error);
+      console.error("Error updating jemaat:", error);
     }
   };
 
