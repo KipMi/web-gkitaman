@@ -14,46 +14,42 @@ type FormData = {
   role: string;
 };
 
-const AddUserForm = () => {
+const EditUserForm = ({ user, id }: { user: FormData; id: string }) => {
   const { isLoggedIn, role, username } = useAuth();
 
   const router = useRouter();
 
-  useEffect(() => {
-    const checkRole = () => {
-      if (role != "ADMIN") {
-        router.push("/");
-      }
-
-      checkRole();
-    };
-  }, [role, router]);
-
-  const { register, handleSubmit, reset } = useForm<FormData>();
+  const { register, handleSubmit, reset, setValue } = useForm<FormData>();
 
   const [submissionMessage, setSubmissionMessage] = useState<string | null>(
     null
   );
 
-  const onSubmit: SubmitHandler<FormData> = async (data) => {
-    const { username, password, role } = data;
-
-    const user = {
-      username,
-      password,
-      role,
+  useEffect(() => {
+    const setUserValue = () => {
+      if (user) {
+        setValue("username", user.username);
+        setValue("role", user.role);
+      }
     };
 
+    setUserValue();
+  }, []);
+
+  const onSubmit = async (data: FormData) => {
     try {
-      const response = await axios.post(url, user);
+      const response = await axios.patch(`${url}/${id}`, data);
       console.log("New user created", response.data);
       reset();
       setSubmissionMessage("Data has been submitted successfully");
+
+      router.back();
+
       setTimeout(() => {
         setSubmissionMessage(null);
       }, 5000);
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
   return (
@@ -77,7 +73,7 @@ const AddUserForm = () => {
         </label>
         <input
           {...register("password")}
-          type="password"
+          type="text"
           id="password"
           className="input input-bordered"
         />
@@ -107,7 +103,7 @@ const AddUserForm = () => {
         )}
         <input
           type="submit"
-          value="Create User"
+          value="Update User"
           className="btn btn-success mt-3"
         />
       </form>
@@ -115,4 +111,4 @@ const AddUserForm = () => {
   );
 };
 
-export default AddUserForm;
+export default EditUserForm;

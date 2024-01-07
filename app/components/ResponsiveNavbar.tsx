@@ -127,6 +127,12 @@ const ResponsiveNavbar: React.FC<ResponsiveNavbarProps> = ({ children }) => {
                         </li>
                       )}
 
+                      {(role === "ADMIN" || role === "SUPERADMIN") && (
+                        <li className="font-normal">
+                          <Link href="/admin/add-user">User Management</Link>
+                        </li>
+                      )}
+
                       <li>
                         <button onClick={logout}>Logout</button>
                       </li>
@@ -223,6 +229,12 @@ const ResponsiveNavbar: React.FC<ResponsiveNavbarProps> = ({ children }) => {
                       <Link href="/admin/add-user" aria-label="close sidebar">
                         User Management
                       </Link>
+                    </li>
+                  )}
+
+                  {(role === "ADMIN" || role === "SUPERADMIN") && (
+                    <li className="font-normal">
+                      <Link href="/admin/add-user">User Management</Link>
                     </li>
                   )}
                   <li>

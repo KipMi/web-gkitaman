@@ -1,6 +1,7 @@
 "use client";
 
 import axios from "axios";
+import Link from "next/link";
 import React, { useState, useEffect } from "react";
 const apiURL = process.env.NEXT_PUBLIC_API_URL;
 const url = `${apiURL}/auth`;
@@ -8,6 +9,7 @@ const url = `${apiURL}/auth`;
 interface repoType {
   username: string;
   role: string;
+  id: string;
 }
 
 const TabelUser = () => {
@@ -44,7 +46,12 @@ const TabelUser = () => {
                 <td>{items.username}</td>
                 <td className="w-1/2 overflow-clip">{items.role}</td>
                 <td className="flex justify-around">
-                  <button className="btn btn-info btn-sm">Edit</button>
+                  <Link
+                    href={`/admin/add-user/edit-user/${items.id}`}
+                    className="btn btn-info btn-sm"
+                  >
+                    Edit
+                  </Link>
                   <button className="btn btn-error btn-sm">Delete</button>
                 </td>
               </tr>
