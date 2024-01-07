@@ -12,9 +12,14 @@ type FormData = {
   username: string;
   password: string;
   role: string;
+  id: string;
 };
 
-const AddUserForm = () => {
+const AddUserForm = ({
+  updateAllUser,
+}: {
+  updateAllUser: (newUser: FormData) => void;
+}) => {
   const { isLoggedIn, role, username } = useAuth();
 
   const router = useRouter();
@@ -46,12 +51,15 @@ const AddUserForm = () => {
 
     try {
       const response = await axios.post(url, user);
+      const newUser: FormData = response.data;
       console.log("New user created", response.data);
       reset();
       setSubmissionMessage("Data has been submitted successfully");
       setTimeout(() => {
         setSubmissionMessage(null);
       }, 5000);
+
+      updateAllUser(newUser);
     } catch (error) {
       console.log(error);
     }

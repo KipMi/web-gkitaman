@@ -16,34 +16,44 @@ type ResponsiveNavbarProps = {
 const ResponsiveNavbar: React.FC<ResponsiveNavbarProps> = ({ children }) => {
   const router = useRouter();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  // const {isLoggedIn, role, username} = useAuth()
   const [role, setRole] = useState();
+  const [reloadKey, setReloadKey] = useState(0);
 
   const logout = async () => {
     await axios.post(url + "/logout");
     router.refresh();
+    setIsLoggedIn((prevIsLoggedIn) => false);
     router.push("/");
   };
 
   useEffect(() => {
     const checkLoggedIn = async () => {
+      var userData = null;
       try {
         const response = await axios.get(url + "/get/user");
-        const userData = response.data;
+        userData = response.data;
 
         console.log("User is logged in", userData);
-        setRole(userData.role);
-        // console.log(role);
-        setIsLoggedIn(true);
+        // setRole(userData.role);
+        // // console.log(role);
+        // setIsLoggedIn((prevIsLoggedIn) => true);
       } catch (error) {
-        setIsLoggedIn(false);
+        // setIsLoggedIn((prevIsLoggedIn) => false);
         console.log("User is not logged in");
       }
 
+      if (userData) {
+        setRole(userData.role);
+        setIsLoggedIn((prevIsLoggedIn) => true);
+      } else {
+        setIsLoggedIn((prev) => false);
+      }
       // console.log(isLoggedIn);
     };
 
     checkLoggedIn();
-  }, [isLoggedIn, role]);
+  }, [isLoggedIn]);
 
   return (
     <div className="drawer">

@@ -26,7 +26,7 @@ const LoginPage = () => {
     try {
       const response = await axios.post(`${apiURL}/auth/login`, user);
 
-      alert("Login Success");
+      // alert("Login Success");
 
       router.push("/admin");
       console.log("Login submitted", response.data);
