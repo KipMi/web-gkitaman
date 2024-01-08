@@ -68,10 +68,14 @@ router.post("/login", async (req, res) => {
         role: user.role,
       },
       secretKey,
-      { expiresIn: "1h" }
+      { expiresIn: "24h" }
     );
 
-    res.cookie("token", token, { httpOnly: false });
+    res.cookie("token", token, {
+      httpOnly: false,
+      sameSite: "None",
+      domain: "gkitamancibunut.org",
+    });
     res.json({ success: true });
   } catch (error) {
     console.error(error);
