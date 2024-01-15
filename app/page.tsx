@@ -11,6 +11,7 @@ import KegiatanTerkini from "./KegiatanTerkini";
 import KomisiKami from "./KomisiKami";
 import CarouselGallery from "./CarouselGallery";
 import RenunganComponent from "./RenunganComponent";
+import YoutubeVideo from "./YoutubeVideo";
 
 export default function Home() {
   const refScroll = useRef<null | HTMLDivElement>(null);
@@ -25,52 +26,38 @@ export default function Home() {
             className="w-full h-full object-cover absolute mix-blend-overlay z-0"
           />
           <div className="w-full flex flex-col items-center">
-            <h1 className="font-bold text-3xl text-white z-10">
+            <h1 className="font-bold text-3xl text-center text-white z-10">
               Welcome to GKI Taman Cibunut
             </h1>
             <div className="w-1/2 flex flex-col items-center">
-              <h1 className="font-bold text-white">
+              <h1 className="font-bold text-white text-center">
                 Working Toward a Brighter Future
               </h1>
-              <p className="text-white text-center">
-                We believe in taking action with urgency and care to serve those
-                who need us most. Please join us by supporting our efforts to
-                make a measurable difference in the lives of others. It’s time
-                to make real change.
-              </p>
             </div>
           </div>
           {/* <ScrollButton label="Tentang Kami" scrollRef={refScroll} /> */}
         </div>
         <div
-          className="w-full h-auto flex flex-col relative justify-center items-center"
+          className="w-full h-auto flex flex-col justify-center items-center"
           id="sejarah"
           ref={refScroll}
         >
-          <div className="w-1/2 m-5 p-5 border-2 rounded-md">
+          <div className="lg:w-3/4 w-full m-5 p-5 border-2 rounded-md">
             <h1 className="font-bold my-5 text-center">Renungan Hari Ini</h1>
             <RenunganComponent />
           </div>
           <div className="w-full flex flex-col items-center p-5">
-            <div className="w-3/4 px-52">
-              <h1 className="font-bold text-xl text-center">Who We Are</h1>
-              <p className="text-center">
-                Our strength lies not only in the words we stand by, but most
-                importantly in the actions of our initiatives. From the moment
-                we started our work in 2000, we understood that by working
-                together we could overcome our challenges much more efficiently,
-                and that is why we ultimately decided to launch
-                gkitamancibunutbandung. We strive to make a positive change in
-                all of our pursuits.
-              </p>
+            <div className="lg:w-3/4 flex flex-col items-center">
+              <h1 className="font-bold text-xl text-center">Video Ibadah</h1>
+              <YoutubeVideo videoUrl="https://www.youtube.com/watch?v=xNRJwmlRBNU" />
             </div>
           </div>
           <h1 className="font-bold">Pendeta Kami</h1>
-          <CarouselGallery />
+          {/* <CarouselGallery /> */}
         </div>
-        <div className="h-auto px-20 flex flex-col items-center my-52">
+        <div className="h-auto lg:px-20 flex flex-col items-center my-52">
           <h1 className="text-2xl text-center">Komisi Gereja</h1>
-          <div className="flex flex-wrap flex-col justify-around w-3/4 p-10">
+          <div className="flex flex-wrap flex-col justify-around lg:w-3/4 w-full p-10">
             <KomisiKami title="Komisi Dewasa">
               Empowering Others gkitamancibunutbandung is dedicated to putting
               our San Francisco community first. Our Community Outreach program

@@ -73,8 +73,6 @@ router.post("/login", async (req, res) => {
 
     res.cookie("token", token, {
       httpOnly: false,
-      sameSite: "None",
-      domain: ".gkitamancibunut.org",
     });
     res.json({ success: true });
   } catch (error) {

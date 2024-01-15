@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 const url = `${apiUrl}/renungan`;
 
@@ -18,7 +18,7 @@ const RenunganComponent = () => {
 
   useEffect(() => {
     const fetchRenungan = async () => {
-      const response = await axios.get(url + '/1');
+      const response = await axios.get(url + "/1");
       setRenungan(response.data);
       setHasFetchedData(true);
     };
@@ -38,7 +38,7 @@ const RenunganComponent = () => {
       <div className="w-full flex justify-center">{renungan?.kitab}</div>
       <div className="w-full flex justify-center">{renungan?.ayat}</div>
       <div className="w-full flex justify-center my-3">
-        <p>{renungan?.content}</p>
+        <p className=" text-justify">{renungan?.content}</p>
       </div>
     </div>
   );

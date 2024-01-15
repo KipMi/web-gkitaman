@@ -31,7 +31,7 @@ const CarouselGallery = () => {
   }, [hasFetchedData]);
 
   return (
-    <div className="carousel carousel-center max-w-lg p-4 space-x-4 rounded-box">
+    <div className="carousel carousel-center max-w-lg rounded-box">
       {pendeta.map((pendeta: PendetaType, i: number) => {
         return (
           <div className="carousel-item" key={i}>
