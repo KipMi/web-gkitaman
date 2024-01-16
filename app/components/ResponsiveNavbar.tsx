@@ -96,7 +96,7 @@ const ResponsiveNavbar: React.FC<ResponsiveNavbarProps> = ({ children }) => {
                 <Link href="/pelayanan/umum">Pelayanan</Link>
               </li>
               <li className="font-normal">
-                <Link href="/kegiatan/anak">Kegiatan</Link>
+                <Link href="/kegiatan">Kegiatan</Link>
               </li>
               <li>
                 <details className="dropdown">
@@ -178,7 +178,7 @@ const ResponsiveNavbar: React.FC<ResponsiveNavbarProps> = ({ children }) => {
             </Link>
           </li>
           <li className="font-normal">
-            <Link href="/kegiatan/anak" aria-label="close sidebar">
+            <Link href="/kegiatan" aria-label="close sidebar">
               Kegiatan
             </Link>
           </li>

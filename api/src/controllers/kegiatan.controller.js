@@ -19,7 +19,7 @@ router.get("/", async (req, res) => {
 router.get("/latest", async (req, res) => {
   try {
     const kegiatans = await prisma.kegiatan.findMany({
-      take: 4,
+      take: 8,
       orderBy: {
         createdAt: "desc",
       },

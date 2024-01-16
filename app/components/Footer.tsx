@@ -1,6 +1,6 @@
-import Image from 'next/image';
-import React from 'react';
-import gkilogo from '../assets/img/gkilogo.png';
+import Image from "next/image";
+import React from "react";
+import gkilogo from "../assets/img/gkilogo.png";
 
 const Footer = () => {
   return (
@@ -18,8 +18,7 @@ const Footer = () => {
       </nav>
       <nav>
         <header className="footer-title">Kontak Kami</header>
-        <a className="link link-hover">Email disini</a>
-        <a className="link link-hover">No telp disini</a>
+        <a className="link link-hover">Telp: (022) 4205541</a>
       </nav>
     </footer>
   );

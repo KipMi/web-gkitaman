@@ -1,6 +1,6 @@
-import React from 'react';
-import Image from 'next/image';
-import { StaticImport } from 'next/dist/shared/lib/get-img-props';
+import React from "react";
+import Image from "next/image";
+import { StaticImport } from "next/dist/shared/lib/get-img-props";
 
 type kegiatanProps = {
   judulKegiatan: string;
@@ -17,9 +17,9 @@ const KegiatanCard = (props: kegiatanProps) => {
       <div className="card-body">
         <h2 className="card-title">{props.judulKegiatan}</h2>
         <p>{props.children}</p>
-        <div className="card-actions justify-end">
+        {/* <div className="card-actions justify-end">
           <button className="btn btn-primary">Details</button>
-        </div>
+        </div> */}
       </div>
     </div>
   );

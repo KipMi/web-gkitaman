@@ -12,6 +12,12 @@ import KomisiKami from "./KomisiKami";
 import CarouselGallery from "./CarouselGallery";
 import RenunganComponent from "./RenunganComponent";
 import YoutubeVideo from "./YoutubeVideo";
+import asm from "./assets/img/Anaksekolahminggu.jpg";
+import dws from "./assets/img/dws.png";
+import rmj from "./assets/img/rmj.png";
+import pmd from "./assets/img/pmd.png";
+import usl from "./assets/img/usl.png";
+import mmd from "./assets/img/mmd.png";
 
 export default function Home() {
   const refScroll = useRef<null | HTMLDivElement>(null);
@@ -29,11 +35,6 @@ export default function Home() {
             <h1 className="font-bold text-3xl text-center text-white z-10">
               Welcome to GKI Taman Cibunut
             </h1>
-            <div className="w-1/2 flex flex-col items-center">
-              <h1 className="font-bold text-white text-center">
-                Working Toward a Brighter Future
-              </h1>
-            </div>
           </div>
           {/* <ScrollButton label="Tentang Kami" scrollRef={refScroll} /> */}
         </div>
@@ -53,30 +54,48 @@ export default function Home() {
             </div>
           </div>
           <h1 className="font-bold">Pendeta Kami</h1>
-          {/* <CarouselGallery /> */}
+          <CarouselGallery />
         </div>
         <div className="h-auto lg:px-20 flex flex-col items-center my-52">
           <h1 className="text-2xl text-center">Komisi Gereja</h1>
           <div className="flex flex-wrap flex-col justify-around lg:w-3/4 w-full p-10">
-            <KomisiKami title="Komisi Dewasa">
+            <KomisiKami title="Komisi Anak Sekolah Minggu" imgSrc={asm}>
               Empowering Others gkitamancibunutbandung is dedicated to putting
               our San Francisco community first. Our Community Outreach program
               provides a much-needed service for those in dire need. Lend a
               helping hand and join our efforts today.
             </KomisiKami>
-            <KomisiKami title="Komisi Remaja & Pemuda">
+            <KomisiKami title="Komisi Remaja" imgSrc={rmj}>
               Empowering Others gkitamancibunutbandung is dedicated to putting
               our San Francisco community first. Our Community Outreach program
               provides a much-needed service for those in dire need. Lend a
               helping hand and join our efforts today.
             </KomisiKami>
-            <KomisiKami title="Komisi Anak">
+            <KomisiKami title="Komisi Pemuda" imgSrc={pmd}>
               Empowering Others gkitamancibunutbandung is dedicated to putting
               our San Francisco community first. Our Community Outreach program
               provides a much-needed service for those in dire need. Lend a
               helping hand and join our efforts today.
             </KomisiKami>
-            <KomisiKami title="Komisi Usia Lanjut">
+            <KomisiKami title="Komisi Dewasa" imgSrc={dws}>
+              Empowering Others gkitamancibunutbandung is dedicated to putting
+              our San Francisco community first. Our Community Outreach program
+              provides a much-needed service for those in dire need. Lend a
+              helping hand and join our efforts today.
+            </KomisiKami>
+            <KomisiKami title="Komisi Usia Lanjut" imgSrc={usl}>
+              Empowering Others gkitamancibunutbandung is dedicated to putting
+              our San Francisco community first. Our Community Outreach program
+              provides a much-needed service for those in dire need. Lend a
+              helping hand and join our efforts today.
+            </KomisiKami>
+            <KomisiKami title="Komisi Kesenian" imgSrc={asm}>
+              Empowering Others gkitamancibunutbandung is dedicated to putting
+              our San Francisco community first. Our Community Outreach program
+              provides a much-needed service for those in dire need. Lend a
+              helping hand and join our efforts today.
+            </KomisiKami>
+            <KomisiKami title="Komisi Multimedia" imgSrc={mmd}>
               Empowering Others gkitamancibunutbandung is dedicated to putting
               our San Francisco community first. Our Community Outreach program
               provides a much-needed service for those in dire need. Lend a
