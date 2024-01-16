@@ -55,12 +55,20 @@ model Jemaat {
   golonganDarah String
   alamatRumah   String
   wilayah       String
-  pekerjaan     String? 
+  pekerjaan     String?
   jabatan       String?
   perusahaan    String?
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
   jemaat        OrangTua? @relation("Jemaat")
+}
+
+model PemahamanAlkitab {
+  id        Int      @id @default(autoincrement())
+  tema      String
+  pendeta   String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
 }
 
 model Ibadah {

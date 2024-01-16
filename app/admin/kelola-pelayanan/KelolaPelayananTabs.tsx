@@ -54,6 +54,12 @@ const KelolaPelayananTabs = () => {
       >
         Renungan Harian
       </Link>
+      <Link
+        href={"./pemahaman-alkitab"}
+        className="tab tab-bordered hover:tab-active"
+      >
+        Pemahaman Alkitab
+      </Link>
       <Link href={"./pendeta"} className="tab tab-bordered hover:tab-active">
         Pendeta
       </Link>

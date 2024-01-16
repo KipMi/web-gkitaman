@@ -16,6 +16,16 @@ interface repoType {
 
 const TabelPendeta = () => {
   const [allKegiatan, setAllKegiatan] = useState<repoType[]>([]);
+  const [message, setMessage] = useState<string | null>(null);
+
+  const onDelete = async (id: number) => {
+    await axios.delete(`${url}/${id}`);
+    setMessage("Data deleted successfully");
+
+    setTimeout(() => {
+      setMessage(null);
+    }, 5000);
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,6 +43,7 @@ const TabelPendeta = () => {
   try {
     return (
       <table className="table overflow-auto">
+        {message ? <h1 className=" text-green-500">{message}</h1> : ""}
         <thead>
           <tr>
             <th>No.</th>
@@ -57,7 +68,12 @@ const TabelPendeta = () => {
                   >
                     Edit
                   </Link>
-                  <button className="btn btn-error btn-sm">Delete</button>
+                  <button
+                    className="btn btn-error btn-sm"
+                    onClick={(e) => onDelete(items.id)}
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
             );

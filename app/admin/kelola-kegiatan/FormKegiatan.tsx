@@ -16,8 +16,9 @@ type FormValues = {
 };
 
 const FormKegiatan = () => {
-  const { register, handleSubmit } = useForm<FormValues>();
+  const { register, handleSubmit, reset } = useForm<FormValues>();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [message, setMessage] = useState<string | null>(null);
   const [role, setRole] = useState();
   const [hasFetchData, setHasFetchData] = useState(false);
   const router = useRouter();
@@ -57,6 +58,11 @@ const FormKegiatan = () => {
       formData.append("deskripsiKegiatan", data.deskripsiKegiatan);
 
       const response = await axios.post(url, formData);
+      reset();
+      setMessage("Data submitted successfully!");
+      setTimeout(() => {
+        setMessage(null);
+      }, 3000);
 
       console.log("Form submitted", response.data);
       router.refresh();
@@ -106,22 +112,40 @@ const FormKegiatan = () => {
           id="komisi"
           className="select select-bordered w-full"
         >
-          <option value="Komisi Anak" disabled={role != "SUPERADMIN"}>
+          <option
+            value="Komisi Anak"
+            disabled={role !== "SUPERADMIN" && role !== "KOMISIANAK"}
+          >
             Komisi Anak
           </option>
-          <option value="Komisi Remaja" disabled={role != "KOMISIREMAJA"}>
+          <option
+            value="Komisi Remaja"
+            disabled={role !== "SUPERADMIN" && role !== "KOMISIREMAJA"}
+          >
             Komisi Remaja
           </option>
-          <option value="Komisi Pemuda" disabled={role != "KOMISIPEMUDA"}>
+          <option
+            value="Komisi Pemuda"
+            disabled={role !== "SUPERADMIN" && role !== "KOMISIPEMUDA"}
+          >
             Komisi Pemuda
           </option>
-          <option value="Komisi Dewasa" disabled={role != "KOMISIDEWASA"}>
+          <option
+            value="Komisi Dewasa"
+            disabled={role !== "SUPERADMIN" && role !== "KOMISIDEWASA"}
+          >
             Komisi Dewasa
           </option>
-          <option value="Komisi Lansia" disabled={role != "KOMISILANSIA"}>
+          <option
+            value="Komisi Lansia"
+            disabled={role !== "SUPERADMIN" && role !== "KOMISILANSIA"}
+          >
             Komisi Lansia
           </option>
-          <option value="Komisi Kesenian" disabled={role != "KOMISIKESENIAN"}>
+          <option
+            value="Komisi Kesenian"
+            disabled={role !== "SUPERADMIN" && role !== "KOMISIKESENIAN"}
+          >
             Komisi Kesenian
           </option>
           <option
@@ -143,6 +167,8 @@ const FormKegiatan = () => {
           className="textarea textarea-bordered block w-full"
         ></textarea>
       </div>
+
+      {message ? <h1 className="text-green-400">{message}</h1> : ""}
       <input type="submit" value="Submit" className="btn btn-success my-5" />
     </form>
   );

@@ -53,6 +53,7 @@ const ibadahController = require("./controllers/ibadah.controller");
 const doaController = require("./controllers/doa.controller");
 const renunganController = require("./controllers/renungan.controller");
 const pendetaController = require("./controllers/pendeta.controller");
+const pemahamanController = require("./controllers/pemahaman.controller");
 
 app.use("/auth", userController);
 app.use("/jemaats", jemaatController);
@@ -62,6 +63,7 @@ app.use("/orangtua", orangTuaController);
 app.use("/ibadah", ibadahController);
 app.use("/doa", doaController);
 app.use("/renungan", renunganController);
+app.use("/pemahaman", pemahamanController);
 
 app.listen(PORT, () => {
   console.log(`server started on port ${PORT}`);

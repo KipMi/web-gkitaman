@@ -1,5 +1,5 @@
-import React from 'react';
-import Link from 'next/link';
+import React from "react";
+import Link from "next/link";
 
 const Tabs = () => {
   return (
@@ -12,17 +12,26 @@ const Tabs = () => {
       </Link>
       <Link
         className="tab tab-bordered hover:tab-active"
-        href={'/pelayanan/persekutuan-doa'}
+        href={"/pelayanan/persekutuan-doa"}
       >
         Persekutuan Doa
       </Link>
-      <Link className="tab tab-bordered hover:tab-active" href="">
+      <Link
+        className="tab tab-bordered hover:tab-active"
+        href="/pelayanan/pemahaman-alkitab"
+      >
         Pemahaman Alkitab
       </Link>
-      <Link className="tab tab-bordered hover:tab-active" href="/pelayanan/baptis">
+      <Link
+        className="tab tab-bordered hover:tab-active"
+        href="/pelayanan/baptis"
+      >
         Layanan Baptis
       </Link>
-      <Link className="tab tab-bordered hover:tab-active" href="/pelayanan/pernikahan">
+      <Link
+        className="tab tab-bordered hover:tab-active"
+        href="/pelayanan/pernikahan"
+      >
         Layanan Pernikahan
       </Link>
     </div>

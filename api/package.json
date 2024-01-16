@@ -7,6 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node src/server",
     "seed": "node src/seed",
+    "pmh": "node src/pmh",
     "dev": "nodemon server"
   },
   "keywords": [],
