@@ -2,7 +2,7 @@
 
 import useAuth from "@/app/hooks/useAuth";
 import axios from "axios";
-import React from "react";
+import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 const apiUrl = process.env.NEXT_PUBLIC_API_URL;
 const url = `${apiUrl}/pendeta`;
@@ -17,6 +17,7 @@ type FormData = {
 
 const FormPendeta = () => {
   const { isLoggedIn, role, username } = useAuth();
+  const [message, setMessage] = useState<string | null>(null);
 
   const { register, handleSubmit, reset } = useForm<FormData>();
   const onSubmit: SubmitHandler<FormData> = async (data) => {
@@ -46,6 +47,11 @@ const FormPendeta = () => {
 
       const response = await axios.post(url, formData);
       console.log("Form submitted", response.data);
+      reset();
+      setMessage("Data submitted successfully");
+      setTimeout(() => {
+        setMessage(null);
+      }, 3000);
     } catch (error) {
       console.log(error);
     }
@@ -108,6 +114,7 @@ const FormPendeta = () => {
           <option value="AKTIF">Aktif</option>
           <option value="TIDAKAKTIF">Tidak Aktif</option>
         </select>
+        {message ? <h1>{message}</h1> : ""}
         <input type="submit" value="Submit" className="btn btn-success" />
       </form>
     </div>
