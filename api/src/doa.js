@@ -27,3 +27,5 @@ async function doa() {
     console.error(error);
   }
 }
+
+doa();
