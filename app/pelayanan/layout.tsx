@@ -1,10 +1,10 @@
-import type { Metadata } from 'next';
-import Tabs from '../components/Tabs';
-import pelayananImg from '../assets/img/pelayanan1.jpg';
-import Image from 'next/image';
+import type { Metadata } from "next";
+import Tabs from "../components/Tabs";
+import pelayananImg from "../assets/img/pper.jpg";
+import Image from "next/image";
 
 export const metadata: Metadata = {
-  title: 'GKI TC - Pelayanan',
+  title: "GKI TC - Pelayanan",
 };
 
 export default function RootLayout({

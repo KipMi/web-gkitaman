@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Tabs from "../components/Tabs";
-import pelayananImg from "../assets/img/pelayanan1.jpg";
+import pelayananImg from "../assets/img/bepim.jpg";
 import Image from "next/image";
 import KegiatanTabs from "./KegiatanTabs";
 
