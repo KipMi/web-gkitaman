@@ -19,7 +19,7 @@ app.use(
       "https://www.gkitamancibunut.org",
       "https://gkitamancibunut.org",
     ],
-    methods: ["POST", "PUT", "OPTIONS", "HEAD", "DELETE", "PATCH"],
+    methods: ["GET", "POST", "PUT", "OPTIONS", "HEAD", "DELETE", "PATCH"],
     credentials: true,
   })
 );
