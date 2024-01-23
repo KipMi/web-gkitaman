@@ -187,11 +187,6 @@ const ResponsiveNavbar: React.FC<ResponsiveNavbarProps> = ({ children }) => {
               <summary>Tentang Kami</summary>
               <ul>
                 <li>
-                  <Link href="/pendeta" aria-label="close sidebar">
-                    Pendeta Kami
-                  </Link>
-                </li>
-                <li>
                   <Link href={"/sejarah"} aria-label="close sidebar">
                     Sejarah
                   </Link>
