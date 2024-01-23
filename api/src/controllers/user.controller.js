@@ -72,7 +72,9 @@ router.post("/login", async (req, res) => {
     );
 
     res.cookie("token", token, {
-      httpOnly: false,
+      httpOnly: true,
+      sameSite: none,
+      secure: true,
     });
     res.json({ success: true });
   } catch (error) {
