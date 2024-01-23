@@ -26,10 +26,9 @@ const LoginPage = () => {
     try {
       const response = await axios.post(`${apiURL}/auth/login`, user);
 
-      // alert("Login Success");
-      setTimeout(() => {
-        router.push("/admin");
-      }, 5000);
+      alert("Login Success");
+
+      router.push("/admin");
       console.log("Login submitted", response.data);
     } catch (error) {
       console.error("Error logging in", error);
