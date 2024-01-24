@@ -16,7 +16,7 @@ const KegiatanCard = (props: kegiatanProps) => {
       </figure>
       <div className="card-body">
         <h2 className="card-title">{props.judulKegiatan}</h2>
-        <p>{props.children}</p>
+        <p className="text-justify">{props.children}</p>
         {/* <div className="card-actions justify-end">
           <button className="btn btn-primary">Details</button>
         </div> */}
