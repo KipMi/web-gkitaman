@@ -16,7 +16,7 @@ const KomisiKami: React.FC<KomisiKamiType> = ({ children, title, imgSrc }) => {
       </figure>
       <div className="card-body overflow-auto">
         <h1 className="card-title">{title}</h1>
-        <p>{children}</p>
+        <p className=" text-justify">{children}</p>
       </div>
     </div>
   );
